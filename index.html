@@ -1,0 +1,448 @@
+<!--
+  Nipun's homepage / intro page
+  --------------------------------
+  Drop this file in the ROOT of your github.io repo as: index.html
+  It has NO Jekyll front matter on purpose, so GitHub Pages serves it
+  as-is and ignores the "minimal" theme in _config.yml. Nothing else needed.
+
+  THINGS TO EDIT (search for "EDIT:"):
+    1. Your one-line bio, if you want to tweak the voice.
+    2. Project card #2 and #3 (placeholders right now).
+    3. Your real links: GitHub username, email, socials.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nipun — builder in Delhi</title>
+<meta name="description" content="Nipun builds small useful things and puts them on the internet. A running list of projects, starting with Delhi Diary." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --paper:   #F0EAD9;   /* natural riso paper            */
+    --paper-2: #E9E1CC;   /* slightly deeper panel         */
+    --ink:     #1B1B2E;   /* warm near-black ink           */
+    --pink:    #FF3E7F;   /* riso fluoro pink              */
+    --blue:    #2540E0;   /* riso blue                     */
+    --yellow:  #FFC400;   /* riso yellow                   */
+    --line:    rgba(27,27,46,.16);
+
+    --display: "Syne", system-ui, sans-serif;
+    --body:    "Space Grotesk", system-ui, sans-serif;
+    --mono:    "Space Mono", ui-monospace, monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* paper grain overlay */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.5;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  .wrap{
+    width:min(920px, 90vw);
+    margin-inline:auto;
+    padding-block:clamp(3rem, 9vw, 6.5rem);
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--blue);
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:2px;
+    background:var(--pink);
+  }
+
+  /* ---------- HERO / INTRO ---------- */
+  .intro{ margin-top:1.4rem; }
+
+  .name{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(3.4rem, 13vw, 7.6rem);
+    line-height:.92;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    /* riso misregistration: offset colour duplicate behind */
+    text-shadow:
+      .06em .06em 0 var(--pink),
+      .12em .12em 0 var(--blue);
+  }
+  .name .wave{ display:inline-block; transform-origin:70% 70%; }
+
+  .lede{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.35rem, 4vw, 2rem);
+    line-height:1.15;
+    letter-spacing:-.01em;
+    margin-top:1.6rem;
+    max-width:22ch;
+  }
+  .lede .hi{
+    background:linear-gradient(transparent 62%, var(--yellow) 62%);
+    padding-inline:.08em;
+  }
+
+  /* EDIT: your bio voice lives here */
+  .bio{
+    font-size:1.06rem;
+    max-width:56ch;
+    margin-top:1.5rem;
+    color:rgba(27,27,46,.86);
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.7rem;
+    margin-top:2rem;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:.82rem;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--paper);
+    border:2px solid var(--ink);
+    padding:.5rem .85rem;
+    display:inline-flex;
+    align-items:center;
+    gap:.45rem;
+    box-shadow:3px 3px 0 var(--ink);
+    transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  .tag:hover, .tag:focus-visible{
+    transform:translate(-2px,-2px);
+    box-shadow:5px 5px 0 var(--pink);
+    background:var(--yellow);
+    outline:none;
+  }
+  .tag .dot{ width:8px; height:8px; border-radius:50%; background:var(--blue); }
+
+  /* ---------- WORK / PROJECTS ---------- */
+  .work{ margin-top:clamp(4rem, 11vw, 7rem); }
+
+  .work-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:.9rem;
+  }
+  .work-head h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.6rem, 5vw, 2.4rem);
+    letter-spacing:-.01em;
+  }
+  .work-head .count{
+    font-family:var(--mono);
+    font-size:.82rem;
+    color:rgba(27,27,46,.6);
+  }
+
+  .grid{
+    margin-top:2.2rem;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:2rem;
+  }
+
+  .card{
+    position:relative;
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    padding:1.6rem 1.5rem 1.7rem;
+    box-shadow:8px 8px 0 var(--accent, var(--ink));
+    transition:transform .18s ease, box-shadow .18s ease;
+    display:flex;
+    flex-direction:column;
+    min-height:100%;
+  }
+  .card:nth-child(1){ transform:rotate(-1.1deg); }
+  .card:nth-child(2){ transform:rotate(.9deg); }
+  .card:nth-child(3){ transform:rotate(-.6deg); }
+  .card:nth-child(4){ transform:rotate(1deg); }
+  .card:hover{
+    transform:rotate(0) translate(-3px,-3px);
+    box-shadow:13px 13px 0 var(--accent, var(--ink));
+  }
+
+  .card.feature{
+    grid-column:1 / -1;
+    --accent:var(--pink);
+  }
+  .card.c-blue{ --accent:var(--blue); }
+  .card.c-yellow{ --accent:var(--yellow); }
+  .card.ghost{
+    --accent:var(--line);
+    border-style:dashed;
+    border-color:rgba(27,27,46,.4);
+    color:rgba(27,27,46,.6);
+    justify-content:center;
+    text-align:center;
+  }
+
+  .status{
+    font-family:var(--mono);
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    align-self:flex-start;
+    padding:.28rem .6rem;
+    border:2px solid var(--ink);
+    background:var(--accent, var(--ink));
+    color:var(--ink);
+    margin-bottom:1rem;
+  }
+  .card.c-blue .status{ color:var(--paper); }
+  .card.feature .status{ color:var(--paper); }
+
+  .card h3{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.5rem, 4.5vw, 2.1rem);
+    letter-spacing:-.01em;
+    line-height:1.02;
+  }
+  .card.feature h3{ font-size:clamp(2rem, 6vw, 3rem); }
+
+  .card p{
+    margin-top:.85rem;
+    font-size:1rem;
+    color:rgba(27,27,46,.85);
+    max-width:60ch;
+  }
+
+  .stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    margin-top:1.2rem;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:.72rem;
+    padding:.28rem .55rem;
+    border:1.5px solid var(--ink);
+    background:var(--paper-2);
+  }
+
+  .card .go{
+    margin-top:1.3rem;
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:.9rem;
+    text-decoration:none;
+    color:var(--ink);
+    align-self:flex-start;
+    border-bottom:3px solid var(--accent, var(--ink));
+    padding-bottom:.1rem;
+    transition:gap .12s ease;
+  }
+  .card .go:hover{ background:var(--yellow); }
+
+  .ghost .plus{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:2.4rem;
+    line-height:1;
+  }
+  .ghost span.txt{ font-family:var(--mono); font-size:.85rem; margin-top:.5rem; }
+
+  /* ---------- FOOTER ---------- */
+  .foot{
+    margin-top:clamp(4rem, 10vw, 6rem);
+    padding-top:1.4rem;
+    border-top:2px solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-family:var(--mono);
+    font-size:.8rem;
+    color:rgba(27,27,46,.7);
+  }
+  .foot a{ color:var(--ink); }
+
+  /* ---------- MOTION ---------- */
+  .rise{ opacity:0; animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+  .rise:nth-child(1){ animation-delay:.05s; }
+  .d1{ animation-delay:.12s; } .d2{ animation-delay:.2s; }
+  .d3{ animation-delay:.3s; }  .d4{ animation-delay:.4s; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .wave{ animation:wave 2.4s ease-in-out 1s 2; }
+  @keyframes wave{
+    0%,100%{ transform:rotate(0); }
+    20%{ transform:rotate(16deg); }
+    40%{ transform:rotate(-6deg); }
+    60%{ transform:rotate(12deg); }
+    80%{ transform:rotate(-3deg); }
+  }
+
+  :focus-visible{ outline:3px solid var(--blue); outline-offset:3px; }
+
+  @media (max-width:640px){
+    .grid{ grid-template-columns:1fr; }
+    .card, .card:nth-child(n){ transform:rotate(0); }
+    .name{ text-shadow:.05em .05em 0 var(--pink), .1em .1em 0 var(--blue); }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+    .rise{ opacity:1; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+
+<body>
+  <main class="wrap">
+
+    <!-- ================= INTRO ================= -->
+    <section class="intro">
+      <span class="eyebrow rise">Builder · Delhi · perpetually shipping</span>
+
+      <h1 class="name rise d1">Nipun <span class="wave">👋</span></h1>
+
+      <p class="lede rise d2"><span class="hi">I build small useful things</span> and put them on the internet.</p>
+
+      <!-- EDIT: your bio. Keep it to a few honest sentences. -->
+      <p class="bio rise d2">
+        I take a small everyday annoyance, poke at it until it becomes a web app,
+        and ship it before I overthink it. Mostly Flask, a fair bit of scraping,
+        and a lot of coffee. This page is my running logbook of what I'm making,
+        so bookmark it if you want to watch the pile grow.
+      </p>
+
+      <!-- EDIT: your real links -->
+      <div class="tags rise d3">
+        <a class="tag" href="https://github.com/your-username"><span class="dot"></span>GitHub</a>
+        <a class="tag" href="mailto:you@example.com"><span class="dot"></span>Email</a>
+        <a class="tag" href="https://thedelhidiary.in"><span class="dot"></span>thedelhidiary.in</a>
+      </div>
+    </section>
+
+    <!-- ================= WORK ================= -->
+    <section class="work">
+      <div class="work-head rise">
+        <h2>Things I've built</h2>
+        <span class="count">// the pile so far</span>
+      </div>
+
+      <div class="grid">
+
+        <!-- Featured project: real -->
+        <article class="card feature rise d1">
+          <span class="status">Live</span>
+          <h3>Delhi Diary</h3>
+          <p>
+            A cultural events aggregator for Delhi. It quietly scrapes embassy and
+            cultural-institution listings so you can find the good stuff (talks, films,
+            exhibitions, concerts) in one place, instead of checking twelve websites
+            that all update whenever they feel like it.
+          </p>
+          <div class="stack">
+            <span class="chip">Flask</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">BeautifulSoup</span>
+            <span class="chip">Nginx + Gunicorn</span>
+          </div>
+          <a class="go" href="https://thedelhidiary.in">Visit the site →</a>
+        </article>
+
+        <!-- EDIT: placeholder project #2 -->
+        <article class="card c-blue rise d2">
+          <span class="status">In progress</span>
+          <h3>Project two</h3>
+          <p>
+            Your next thing goes here. Swap this copy for whatever you're building,
+            drop in a couple of tech chips, and point the link somewhere real.
+          </p>
+          <div class="stack">
+            <span class="chip">Add</span>
+            <span class="chip">your</span>
+            <span class="chip">stack</span>
+          </div>
+          <a class="go" href="#">See more →</a>
+        </article>
+
+        <!-- EDIT: placeholder project #3 -->
+        <article class="card c-yellow rise d3">
+          <span class="status">Tinkering</span>
+          <h3>Project three</h3>
+          <p>
+            Another slot for a side project, an experiment, or that idea you keep
+            meaning to finish. Duplicate this block for a fourth card if you need it.
+          </p>
+          <div class="stack">
+            <span class="chip">Add</span>
+            <span class="chip">your</span>
+            <span class="chip">stack</span>
+          </div>
+          <a class="go" href="#">See more →</a>
+        </article>
+
+        <!-- Ghost / add card -->
+        <article class="card ghost rise d4">
+          <span class="plus">+</span>
+          <span class="txt">more coming.<br>I ship when I ship.</span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="foot rise">
+      <span>Made in Delhi. Hosted on GitHub Pages.</span>
+      <span>© <span id="yr"></span> Nipun</span>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
